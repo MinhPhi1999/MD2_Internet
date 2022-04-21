@@ -1,5 +1,7 @@
 package com.codegym.config;
 
+import com.codegym.Model.Computer;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ public class ConfigReadAndWriteFile<T> {
             objectOutputStream.close();
             fileOutputStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("-------------------------------------------");
         }
     }
 
@@ -28,7 +30,7 @@ public class ConfigReadAndWriteFile<T> {
             objectInputStream.close();
             fileInputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("-------------------------------------------");
         }
         return tList;
     }

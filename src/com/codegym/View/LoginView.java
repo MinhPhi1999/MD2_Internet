@@ -3,7 +3,6 @@ package com.codegym.View;
 import com.codegym.Controller.ControllerLogin;
 import com.codegym.Model.Login;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class LoginView {
@@ -18,7 +17,7 @@ public class LoginView {
         Login login = new Login(name,pass);
 
         if (controllerLogin.login(login)){
-            new Main1();
+            new MainMenu();
         }else {
             System.out.println("sai rồi nhập lại đi");
             new Main();
