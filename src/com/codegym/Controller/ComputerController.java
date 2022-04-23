@@ -1,28 +1,37 @@
 package com.codegym.Controller;
 
 import com.codegym.Model.Computer;
-import com.codegym.Service.computer.ComputerService;
+import com.codegym.Service.computer.ComputerServiceIMPL;
 
 import java.util.List;
 
 public class ComputerController {
-    private ComputerService computerService = new ComputerService();
-    public List<Computer> showComputerList(){
+    private ComputerServiceIMPL computerService = new ComputerServiceIMPL();
+
+    public List<Computer> showComputerList() {
         return computerService.findAll();
     }
-    public void addComputer(){
+
+    public void addComputer() {
         computerService.addComputer();
     }
-    public void removeComputer(int id){
+
+    public void removeComputer(int id) {
         computerService.removeComputer(id);
     }
-    public Computer getComputerByID(int id){
+    public void removeAllComputer(){
+        computerService.removeAll();
+    }
+
+    public Computer getComputerByID(int id) {
         return computerService.getComputerByID(id);
     }
-    public void setOn(int id){
+
+    public void setOn(int id) {
         computerService.setOn(id);
     }
-    public void setOff(int id){
+
+    public void setOff(int id) {
         computerService.setOff(id);
     }
 

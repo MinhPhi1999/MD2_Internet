@@ -10,7 +10,7 @@ public class Main {
         int choice = scanner.nextInt();
         switch (choice){
             case 1:
-              new  UserView().addUserList();
+              new RegisterUserView().addUserList();
               break;
             case 2:
                 new LoginView().login();

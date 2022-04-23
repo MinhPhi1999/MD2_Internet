@@ -17,7 +17,7 @@ public class LoginView {
         Login login = new Login(name,pass);
 
         if (controllerLogin.login(login)){
-            new MainMenu();
+            new MainMenuView();
         }else {
             System.out.println("sai rồi nhập lại đi");
             new Main();

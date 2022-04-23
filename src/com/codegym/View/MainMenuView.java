@@ -7,25 +7,27 @@ import com.codegym.config.ConfigReadAndWriteFile;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainMenu {
+public class MainMenuView {
     Scanner scanner = new Scanner(System.in);
     ComputerController computerController = new ComputerController();
     String path = "E:\\IdeaProjects\\CaseMD2_InternetService\\src\\com\\codegym\\Data\\computerList.txt";
     List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
 
-    public MainMenu() {
+    public MainMenuView() {
         System.out.println("Welcome to Cyber");
         System.out.println("Giá: 10.000 vnd/h");
         System.out.println("1. Hiển thị danh sách máy có trong quán");
         System.out.println("2. Thêm 1 máy mới vào danh sách");
-        System.out.println("3. Sửa đổi thông tin của máy");
-        System.out.println("4. Xóa 1 máy khỏi danh sách.");
+        System.out.println("3. Sửa đổi thông tin của máy & bật tắt máy");
+        System.out.println("4. Xóa máy khỏi danh sách");
         System.out.println("5. Thêm dịch vụ");
         System.out.println("6. Chỉnh sửa tính tiền theo giờ");
         System.out.println("7. Tính Tiền");
         System.out.println("8. Quản lý tài khoản đăng nhập");
         System.out.println("9. Doanh Thu");
         System.out.println("10. Đăng xuất");
+        System.out.println("=============================================");
+        System.out.println("NHẬP SỐ TRÊN MENU: ");
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
@@ -40,6 +42,16 @@ public class MainMenu {
                 break;
             case 4:
                 deleteComputer();
+                break;
+            case 5:
+            case 6:
+            case 8:
+            case 9:
+                System.out.println("CHƯA LÀM TÍNH NĂNG NÀY!!! KHÓ QUÁ ANH CHỊ EM Ạ");
+                new MainMenuView();
+                break;
+            case 7:
+                new PaymentView().showMoney();
                 break;
             case 10:
                 new Main();
@@ -56,11 +68,13 @@ public class MainMenu {
             } else {
                 id = computerList.get(computerList.size() - 1).getId() + 1;
             }
+            System.out.println(computerList);
             System.out.println("nhập tên máy mới: ");
             String name = scanner.nextLine();
             Computer computer = new Computer(id, name);
             computerList.add(computer);
             new ConfigReadAndWriteFile<Computer>().writeToFile(path, computerList);
+            System.out.println(computerList);
             String choice = "";
             while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
                 System.out.println("bạn muốn thêm máy tiếp không?(yes/no)");
@@ -68,7 +82,7 @@ public class MainMenu {
                 if (choice.equalsIgnoreCase("yes")) {
                     addComputer();
                 } else if (choice.equalsIgnoreCase("no")) {
-                    new MainMenu();
+                    new MainMenuView();
                 } else {
                     System.err.println("chỉ yes và no thôi bro");
                 }
@@ -78,8 +92,47 @@ public class MainMenu {
 
     public void deleteComputer() {
         System.out.println(computerController.showComputerList());
-        System.out.println("bạn muốn xóa máy nào");
-        System.out.println("nhập id vào đây");
+//        System.out.println("bạn muốn xóa máy nào");
+//        System.out.println("nhập 'id' vào đây");
+        System.out.println("======================================");
+        System.out.println("nhập '0' nếu bạn muốn xóa toàn bộ máy");
+        System.out.println("nhập '1' nếu bạn muốn xóa từng máy");
+        System.out.println("nhập '-1' nếu bạn muốn trở lại MENU");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice){
+            case -1:
+                new MainMenuView();
+                break;
+            case 0:
+                computerController.removeAllComputer();
+                System.out.println("ĐÃ XÓA TOÀN BỘ MÁY");
+                System.out.println("nhập 'quit' để quay lại MENU");
+                String backMenu = scanner.nextLine();
+                if (backMenu.equalsIgnoreCase("quit")) {
+                    new MainMenuView();
+                }
+                break;
+            case 1:
+                System.out.println("bạn muốn xóa máy nào");
+                delete1Com();
+                String choice1 = "";
+                while (!choice1.equalsIgnoreCase("yes") || !choice1.equalsIgnoreCase("no")) {
+                    System.out.println("bạn muốn xóa tiếp máy nào không?(yes/no)");
+                    choice1 = scanner.nextLine();
+                    if (choice1.equalsIgnoreCase("yes")) {
+                        delete1Com();
+                    } else if (choice1.equalsIgnoreCase("no")) {
+                        new MainMenuView();
+                    } else {
+                        System.err.println("chỉ yes và no thôi bro");
+                    }
+                }
+                break;
+        }
+    }
+    public void delete1Com(){
+        System.out.println("nhập 'id' vào đây");
         int idRemove = scanner.nextInt();
         scanner.nextLine();
         int idvalue = 0;
@@ -89,36 +142,10 @@ public class MainMenu {
             }
         }
         if (idvalue == 1) {
-//            String choice = "";
-//            while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
-//                System.out.println("bạn muốn xóa nữa không?(yes/no)");
-//                choice = scanner.nextLine();
-//                if (choice.equalsIgnoreCase("yes")) {
-//                    computerController.removeComputer(idRemove);
-//                    System.out.println(computerController.showComputerList());
-//                } else if (choice.equalsIgnoreCase("no")) {
-//                    System.out.println(computerController.showComputerList());
-//                } else {
-//                    System.err.println("chỉ yes và no thôi bro");
-//                }
-//            }
             computerController.removeComputer(idRemove);
             System.out.println(computerController.showComputerList());
         } else {
             System.err.println("không thấy máy cần xóa");
         }
-        String choice = "";
-        while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
-            System.out.println("bạn muốn xóa tiếp máy nào không?(yes/no)");
-            choice = scanner.nextLine();
-            if (choice.equalsIgnoreCase("yes")) {
-                deleteComputer();
-            } else if (choice.equalsIgnoreCase("no")) {
-                new MainMenu();
-            } else {
-                System.err.println("chỉ yes và no thôi bro");
-            }
-        }
     }
-
 }

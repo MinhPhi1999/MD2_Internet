@@ -13,18 +13,21 @@ public class ChanceComputerView {
     ComputerController computerController = new ComputerController();
     String path = "E:\\IdeaProjects\\CaseMD2_InternetService\\src\\com\\codegym\\Data\\computerList.txt";
     List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
-    public void chooseChange(){
+
+    public void chooseChange() {
         System.out.println("1. bật tắt máy");
         System.out.println("2. đổi tên máy");
-        System.out.println("0. quay lại menu");
+        System.out.println("nhập số bất kỳ khác 1 & 2 để quay lại menu");
         int choice = scanner.nextInt();
-        switch (choice){
+        switch (choice) {
             case 1:
                 onOffComputer();
+                break;
             case 2:
                 changeComputer();
-            case 0:
-                new MainMenu();
+                break;
+            default:
+                new MainMenuView();
         }
     }
 
@@ -57,40 +60,42 @@ public class ChanceComputerView {
     }
 
     public void changeComputer() {
-        while (true) {
-            System.out.println(computerList);
-            System.out.println("nhập 'id' máy bạn muốn thay đổi");
-            int id = scanner.nextInt();
-            scanner.nextLine();
-            boolean check = false;
-            for (int i = 0; i < computerList.size(); i++) {
-                if (computerList.get(i).getId() == id) {
-                    check = true;
-                    System.out.println(computerList.get(i));
-                    System.out.println("bạn muốn đổi tên máy thành gì?");
-                    String name = scanner.nextLine();
-                    computerList.get(i).setName(name);
-                    System.out.println("KẾT QUẢ : ");
-                    System.out.println(computerList.get(i));
-                    computerList.get(i);
-                    new ConfigReadAndWriteFile<Computer>().writeToFile(path, computerList);
-
-
-                    System.out.println("=====================");
-
+            while (true) {
+                System.out.println(computerList);
+                System.out.println("nhập 'id' máy bạn muốn thay đổi");
+                System.out.println("nhập 0 để quay lại");
+                int id = scanner.nextInt();
+                scanner.nextLine();
+                if (id == 0) {
+                    new ChanceComputerView().chooseChange();
+                } else {
+                    boolean check = false;
+                    for (int i = 0; i < computerList.size(); i++) {
+                        if (computerList.get(i).getId() == id) {
+                            check = true;
+                            System.out.println(computerList.get(i));
+                            System.out.println("bạn muốn đổi tên máy thành gì?");
+                            String name = scanner.nextLine();
+                            computerList.get(i).setName(name);
+                            System.out.println("KẾT QUẢ : ");
+                            System.out.println(computerList.get(i));
+                            computerList.get(i);
+                            new ConfigReadAndWriteFile<Computer>().writeToFile(path, computerList);
+                            System.out.println("=====================");
+                        }
+                    }
+                    if (check == false) {
+                        System.out.println("không thấy máy có id này");
+                        new ChanceComputerView().changeComputer();
+                    }
+                    System.out.println("nhập bất kỳ phím nào để tiếp tục hoặc 'quit' để quay lại ");
+                    String backMenu = scanner.nextLine();
+                    if (backMenu.equalsIgnoreCase("quit")) {
+                        new ChanceComputerView().chooseChange();
+                    }
                 }
             }
-            if (check == false) {
-                System.out.println("không thấy máy có id này");
-                new ChanceComputerView().changeComputer();
-            }
-            System.out.println("nhập bất kỳ phím nào để tiếp tục hoặc 'quit' để quay lại ");
-            String backMenu = scanner.nextLine();
-            if (backMenu.equalsIgnoreCase("quit")) {
-                new MainMenu();
-            }
         }
-    }
 
     public void setOn(int id) {
         while (true) {
@@ -99,10 +104,9 @@ public class ChanceComputerView {
                 if (id == computerList.get(i).getId()) {
                     computerController.setOn(id);
                     check = false;
-                    System.out.println("BẬT MÁY THÀNH CÔNG!");
+                    System.out.println("BẬT MÁY " + computerList.get(i).getName() + " THÀNH CÔNG!");
                     System.out.println("nhập Quit để quay lại");
                     String choice = scanner.nextLine();
-
                     if (choice.equalsIgnoreCase("Quit")) {
                         new ChanceComputerView().chooseChange();
                     }
@@ -110,7 +114,7 @@ public class ChanceComputerView {
             }
             if (check) {
                 System.out.println("không thấy máy này");
-                new MainMenu();
+                new MainMenuView();
             }
         }
     }
@@ -122,10 +126,9 @@ public class ChanceComputerView {
                 if (id == computerList.get(i).getId()) {
                     computerController.setOff(id);
                     check = false;
-                    System.out.println("tắt máy thành công");
+                    System.out.println("tắt máy " + computerList.get(i).getName() + " thành công");
                     System.out.println("nhập Quit để quay lại");
                     String choice = scanner.nextLine();
-
                     if (choice.equalsIgnoreCase("Quit")) {
                         new ChanceComputerView().chooseChange();
                     }
@@ -133,7 +136,7 @@ public class ChanceComputerView {
             }
             if (check) {
                 System.out.println("không thấy máy này");
-                new MainMenu();
+                new MainMenuView();
             }
         }
     }

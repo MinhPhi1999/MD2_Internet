@@ -2,7 +2,6 @@ package com.codegym.View;
 
 import com.codegym.Controller.ComputerController;
 import com.codegym.Model.Computer;
-import com.codegym.Model.Status;
 import com.codegym.config.ConfigReadAndWriteFile;
 
 import java.util.List;
@@ -16,17 +15,21 @@ public class ListComputerView {
 
     public void showListComputer() {
         System.out.println("Danh sách máy trong Cyber");
+        if (computerList.size()==0){
+            System.out.println("CHƯA MUA MÁY THÌ LÀM GÌ CÓ!!!");
+            System.out.println("================================");
+        }else {
         System.out.println(computerController.showComputerList());
         System.out.println("nhập name để xem thông tin máy");
+    }
         System.out.println("nhấn B để trở về menu");
         String name = scanner.nextLine();
         switch (name) {
             case "B":
-                new MainMenu();
+                new MainMenuView();
             default:
                 getComputerByName(name);
         }
-
     }
 
     public void getComputerByName(String name) {
@@ -39,7 +42,7 @@ public class ListComputerView {
         String choice = scanner.nextLine();
         switch (choice) {
             case "B":
-                new MainMenu();
+                new MainMenuView();
         }
     }
 

@@ -5,7 +5,7 @@ import com.codegym.config.ConfigReadAndWriteFile;
 
 import java.util.List;
 
-public class ComputerService implements IComputerService<Computer> {
+public class ComputerServiceIMPL implements IComputerService<Computer> {
     private String path = "E:\\IdeaProjects\\CaseMD2_InternetService\\src\\com\\codegym\\Data\\computerList.txt";
     List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
 
@@ -33,6 +33,10 @@ public class ComputerService implements IComputerService<Computer> {
                 computerList.remove(computerList.get(i));
             }
         }
+    }
+    public void removeAll(){
+        computerList.removeAll(computerList);
+        new ConfigReadAndWriteFile<Computer>().writeToFile(path, computerList);
     }
 
     public Computer getComputerByID(int id){

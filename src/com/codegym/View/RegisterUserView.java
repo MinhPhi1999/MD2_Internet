@@ -6,7 +6,7 @@ import com.codegym.Model.User;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class UserView {
+public class RegisterUserView {
     Scanner scanner = new Scanner(System.in);
     UserListController userListController = new UserListController();
 
@@ -27,6 +27,10 @@ public class UserView {
         while (true) {
             System.out.println("enter username: ");
             String username = scanner.nextLine();
+//            boolean checkName = Pattern.matches("[a-z0-9_-]{6,}",username);
+//            if(!checkName){
+//                System.err.println("Username Failed! Please try again!");
+//            }
             System.out.println("enter password: ");
             String password = scanner.nextLine();
             User user = new User(username, password);
@@ -44,5 +48,4 @@ public class UserView {
             }
         }
     }
-
 }
