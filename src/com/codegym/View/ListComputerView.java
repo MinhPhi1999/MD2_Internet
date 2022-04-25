@@ -14,10 +14,11 @@ public class ListComputerView {
     List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
 
     public void showListComputer() {
-        System.out.println("Danh sách máy trong Cyber");
+        System.out.println("Danh sách máy trong NÉT CỎ");
         if (computerList.size()==0){
             System.out.println("CHƯA MUA MÁY THÌ LÀM GÌ CÓ!!!");
             System.out.println("================================");
+            new MainMenuView().addComputer();
         }else {
         System.out.println(computerController.showComputerList());
         System.out.println("nhập name để xem thông tin máy");

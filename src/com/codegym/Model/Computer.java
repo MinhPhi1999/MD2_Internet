@@ -99,7 +99,7 @@ public class Computer implements Serializable {
                 ", price="+price+" đồng/h "+
                 ", time="+ time() + " giây " +
                 ", money="+ price()+" đồng "+
-                '}';
+                '}'+'\n';
     }
     @Override
     public String toString() {
@@ -107,6 +107,6 @@ public class Computer implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", status=" + status +
-                '}';
+                '}' + "\n";
     }
 }

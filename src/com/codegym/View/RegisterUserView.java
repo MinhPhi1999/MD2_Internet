@@ -27,10 +27,12 @@ public class RegisterUserView {
         while (true) {
             System.out.println("enter username: ");
             String username = scanner.nextLine();
-//            boolean checkName = Pattern.matches("[a-z0-9_-]{6,}",username);
-//            if(!checkName){
-//                System.err.println("Username Failed! Please try again!");
-//            }
+            // validate
+            boolean checkName = Pattern.matches("[a-z0-9_-]{6,}",username);
+            if(!checkName){
+                System.err.println("Username Failed! Please try again!");
+                addUserList();
+            }
             System.out.println("enter password: ");
             String password = scanner.nextLine();
             User user = new User(username, password);

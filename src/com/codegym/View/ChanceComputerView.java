@@ -73,6 +73,7 @@ public class ChanceComputerView {
                 } else {
                     boolean check = false;
                     for (int i = 0; i < computerList.size(); i++) {
+
                         if (computerList.get(i).getId() == id) {
                             check = true;
                             System.out.println(computerList.get(i));

@@ -17,6 +17,8 @@ public class LoginView {
         Login login = new Login(name,pass);
 
         if (controllerLogin.login(login)){
+            System.out.println("WELCOME BRO!!! " + name+" ĐÃ ĐẾN VỚI NÉT CỎ");
+            System.out.println("========================================");
             new MainMenuView();
         }else {
             System.out.println("sai rồi nhập lại đi");

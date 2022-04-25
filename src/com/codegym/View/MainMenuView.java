@@ -14,11 +14,10 @@ public class MainMenuView {
     List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
 
     public MainMenuView() {
-        System.out.println("Welcome to NET cỏ !!!");
-        System.out.println("Giá: 10.000 vnd/h");
+        System.out.println("WELCOME TO NÉT CỎ !!!");
         System.out.println("1. Hiển thị danh sách máy có trong quán");
         System.out.println("2. Thêm 1 máy mới vào danh sách");
-        System.out.println("3. Sửa đổi thông tin của máy & bật tắt máy");
+        System.out.println("3. ON/OFF & Sửa thông tin của máy");
         System.out.println("4. Xóa máy khỏi danh sách");
         System.out.println("5. Thêm dịch vụ");
         System.out.println("6. Chỉnh sửa tính tiền theo giờ");
@@ -28,40 +27,47 @@ public class MainMenuView {
         System.out.println("10. Đăng xuất");
         System.out.println("=============================================");
         System.out.println("NHẬP SỐ TRÊN MENU: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-        switch (choice) {
-            case 1:
-                new ListComputerView().showListComputer();
-                break;
-            case 2:
-                addComputer();
-                break;
-            case 3:
-                new ChanceComputerView().chooseChange();
-                break;
-            case 4:
-                deleteComputer();
-                break;
-            case 6:
-                new ChangePriceView().changePrice();
-                break;
-            case 5:
-            case 8:
-            case 9:
-                System.out.println("CHƯA LÀM TÍNH NĂNG NÀY!!! KHÓ QUÁ ANH CHỊ EM Ạ");
-                new MainMenuView();
-                break;
-            case 7:
-                new PaymentView().showMoney();
-                break;
-            case 10:
-                new Main();
-                break;
-            default:
-                System.err.println("NHẬP SỐ TRÊN KIA THÔI BRO!!!");
-                new MainMenuView();
+        try {
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1:
+                    new ListComputerView().showListComputer();
+                    break;
+                case 2:
+                    addComputer();
+                    break;
+                case 3:
+                    new ChanceComputerView().chooseChange();
+                    break;
+                case 4:
+                    deleteComputer();
+                    break;
+                case 6:
+                    new ChangePriceView().changePrice();
+                    break;
+                case 5:
+                case 8:
+                case 9:
+                    System.err.println("CHƯA LÀM TÍNH NĂNG NÀY!!! KHÓ QUÁ ANH CHỊ EM Ạ");
+                    System.out.println("============================================================");
+                    new MainMenuView();
+                    break;
+                case 7:
+                    new PaymentView().showMoney();
+                    break;
+                case 10:
+                    new Main();
+                    break;
+                default:
+                    System.err.println("NHẬP SỐ TRÊN KIA THÔI BRO!!!");
+                    new MainMenuView();
+            }
+        }catch (Exception e){
+            System.err.println("NHẬP SỐ THÔI BRO!!!");
+            new MainMenuView();
         }
+
     }
 
 
