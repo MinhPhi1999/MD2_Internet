@@ -14,7 +14,7 @@ public class MainMenuView {
     List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
 
     public MainMenuView() {
-        System.out.println("Welcome to Cyber");
+        System.out.println("Welcome to NET cỏ !!!");
         System.out.println("Giá: 10.000 vnd/h");
         System.out.println("1. Hiển thị danh sách máy có trong quán");
         System.out.println("2. Thêm 1 máy mới vào danh sách");
@@ -43,8 +43,10 @@ public class MainMenuView {
             case 4:
                 deleteComputer();
                 break;
-            case 5:
             case 6:
+                new ChangePriceView().changePrice();
+                break;
+            case 5:
             case 8:
             case 9:
                 System.out.println("CHƯA LÀM TÍNH NĂNG NÀY!!! KHÓ QUÁ ANH CHỊ EM Ạ");
@@ -56,6 +58,9 @@ public class MainMenuView {
             case 10:
                 new Main();
                 break;
+            default:
+                System.err.println("NHẬP SỐ TRÊN KIA THÔI BRO!!!");
+                new MainMenuView();
         }
     }
 

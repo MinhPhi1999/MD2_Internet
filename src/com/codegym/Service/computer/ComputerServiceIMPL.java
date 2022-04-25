@@ -6,8 +6,8 @@ import com.codegym.config.ConfigReadAndWriteFile;
 import java.util.List;
 
 public class ComputerServiceIMPL implements IComputerService<Computer> {
-    private String path = "E:\\IdeaProjects\\CaseMD2_InternetService\\src\\com\\codegym\\Data\\computerList.txt";
-    List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
+    public static String path = "E:\\IdeaProjects\\CaseMD2_InternetService\\src\\com\\codegym\\Data\\computerList.txt";
+    public static List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
 
 
     @Override
@@ -65,5 +65,6 @@ public class ComputerServiceIMPL implements IComputerService<Computer> {
             }
         }
     }
+
 
 }

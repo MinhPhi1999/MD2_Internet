@@ -7,6 +7,8 @@ public class Computer implements Serializable {
     private String name;
     private Status status = Status.DISABLE;
     private long startTime,endTime ;
+    public long price;
+
 
     public Computer() {
     }
@@ -17,6 +19,15 @@ public class Computer implements Serializable {
         this.status = Status.DISABLE;
         this.startTime = 0;
         this.endTime = 0;
+        this.price = 10000;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 
     public Status getStatus() {
@@ -72,10 +83,10 @@ public class Computer implements Serializable {
         this.endTime = System.currentTimeMillis();
     }
     public long time(){
-        return (this.endTime-this.startTime)/1000;
+        return ((this.endTime-this.startTime)/1000);
     }
     public long price(){
-        return (this.endTime-this.startTime)/360;
+        return (this.time()*this.price/3600);
     }
 
     public String toString1() {
@@ -85,6 +96,7 @@ public class Computer implements Serializable {
                 ", status=" + status +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
+                ", price="+price+" đồng/h "+
                 ", time="+ time() + " giây " +
                 ", money="+ price()+" đồng "+
                 '}';

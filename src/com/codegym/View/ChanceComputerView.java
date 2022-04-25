@@ -3,6 +3,7 @@ package com.codegym.View;
 import com.codegym.Controller.ComputerController;
 import com.codegym.Model.Computer;
 import com.codegym.Model.Status;
+import com.codegym.Service.computer.ComputerServiceIMPL;
 import com.codegym.config.ConfigReadAndWriteFile;
 
 import java.util.List;
@@ -12,12 +13,12 @@ public class ChanceComputerView {
     Scanner scanner = new Scanner(System.in);
     ComputerController computerController = new ComputerController();
     String path = "E:\\IdeaProjects\\CaseMD2_InternetService\\src\\com\\codegym\\Data\\computerList.txt";
-    List<Computer> computerList = new ConfigReadAndWriteFile<Computer>().readFromFile(path);
+    List<Computer> computerList = ComputerServiceIMPL.computerList;
 
     public void chooseChange() {
         System.out.println("1. bật tắt máy");
         System.out.println("2. đổi tên máy");
-        System.out.println("nhập số bất kỳ khác 1 & 2 để quay lại menu");
+        System.out.println("0. để quay lại menu");
         int choice = scanner.nextInt();
         switch (choice) {
             case 1:
@@ -45,6 +46,7 @@ public class ChanceComputerView {
                     if (id == computerList.get(i).getId()) {
                         if (computerList.get(i).getStatus() == Status.DISABLE) {
                             setOn(id);
+
                         } else {
                             setOff(id);
                         }
@@ -105,11 +107,7 @@ public class ChanceComputerView {
                     computerController.setOn(id);
                     check = false;
                     System.out.println("BẬT MÁY " + computerList.get(i).getName() + " THÀNH CÔNG!");
-                    System.out.println("nhập Quit để quay lại");
-                    String choice = scanner.nextLine();
-                    if (choice.equalsIgnoreCase("Quit")) {
-                        new ChanceComputerView().chooseChange();
-                    }
+                    onOffComputer();
                 }
             }
             if (check) {
@@ -127,11 +125,7 @@ public class ChanceComputerView {
                     computerController.setOff(id);
                     check = false;
                     System.out.println("tắt máy " + computerList.get(i).getName() + " thành công");
-                    System.out.println("nhập Quit để quay lại");
-                    String choice = scanner.nextLine();
-                    if (choice.equalsIgnoreCase("Quit")) {
-                        new ChanceComputerView().chooseChange();
-                    }
+                    onOffComputer();
                 }
             }
             if (check) {
