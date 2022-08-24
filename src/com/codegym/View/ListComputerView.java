@@ -44,6 +44,9 @@ public class ListComputerView {
         switch (choice) {
             case "B":
                 new MainMenuView();
+                break;
+            default:
+                System.out.println("nhập B đê");
         }
     }
 

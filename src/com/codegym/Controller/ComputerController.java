@@ -12,8 +12,9 @@ public class ComputerController {
         return computerService.findAll();
     }
 
-    public void addComputer() {
-        computerService.addComputer();
+    public void addComputer(Computer computer) {
+        computerService.save(computer);
+        computerService.findAll();
     }
 
     public void removeComputer(int id) {

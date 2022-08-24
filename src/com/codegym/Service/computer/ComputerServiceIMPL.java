@@ -18,14 +18,9 @@ public class ComputerServiceIMPL implements IComputerService<Computer> {
 
     @Override
     public void save(Computer computer) {
-        new ConfigReadAndWriteFile<Computer>().writeToFile(path, computerList);
         computerList.add(computer);
     }
 
-
-    public void addComputer() {
-        computerList.add(new Computer());
-    }
 
     public void removeComputer(int id) {
         for (int i = 0; i < computerList.size(); i++) {

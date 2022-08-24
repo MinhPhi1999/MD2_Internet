@@ -83,8 +83,7 @@ public class MainMenuView {
             System.out.println("nhập tên máy mới: ");
             String name = scanner.nextLine();
             Computer computer = new Computer(id, name);
-            computerList.add(computer);
-            new ConfigReadAndWriteFile<Computer>().writeToFile(path, computerList);
+            computerController.addComputer(computer);
             System.out.println(computerList);
             String choice = "";
             while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
